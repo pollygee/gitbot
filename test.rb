@@ -13,7 +13,7 @@ require 'pry'
 class GifBotTest < Minitest::Test
   include Rack::Test::Methods
   def app
-    GifBotWeb
+    GifbotWeb
   end
 
   def setup
