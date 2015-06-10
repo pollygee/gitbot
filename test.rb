@@ -33,8 +33,11 @@ class GifBotTest < Minitest::Test
     assert_equal gif.id.to_s, last_response.body
   end
 
-  def test_url_can_not_be_added_wihtout_a_name
-
+  def test_url_can_not_be_added_wihtout_a_username
+    post "/add",
+      url: "www.google.com"
+    assert_equal 400, last_response.status
+    assert_equal 0, Gif.count
   end
 
   def test_can_not_add_without_a_url
