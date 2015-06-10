@@ -11,9 +11,8 @@ class GifbotWeb < Sinatra::Base
       gif.id.to_s
     else
       status 400
+    end
   end
-
-
 
 
 end
