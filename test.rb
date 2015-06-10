@@ -23,7 +23,7 @@ class GifBotTest < Minitest::Test
   end
 
   def test_users_can_add_gifs
-    post "add",
+    post "/add",
       url: "www.google.com",
       name: "Mark"
     assert_equal 200, last_response.status
