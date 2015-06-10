@@ -25,7 +25,7 @@ class GifBotTest < Minitest::Test
   def test_users_can_add_gifs
     post "/add",
       url: "www.google.com",
-      name: "Mark"
+      username: "Mark"
     assert_equal 200, last_response.status
 
     gif = Gif.find_by_url "www.google.com"
