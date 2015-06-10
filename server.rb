@@ -5,8 +5,8 @@ class GifbotWeb < Sinatra::Base
   set :logging, true
 
   post "/add" do 
-    list = GifbotWeb.new
-    gif = list.add_gif params[:url], params[:username],
+    list = GifBot.new
+    gif = list.add_gif params[:url], params[:username]
     gif.to_json
   end
 
