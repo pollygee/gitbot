@@ -41,7 +41,7 @@ class GifBotTest < Minitest::Test
   end
 
   def test_can_not_add_without_a_url
-
+    
   end
 
 
