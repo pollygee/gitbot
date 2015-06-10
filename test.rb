@@ -6,14 +6,14 @@ ENV["TEST"] = ENV["RACK_ENV"] = "test"
 require './db/setup'
 require './lib/all'
 
-#require './server'
+require './server'
 
 require 'pry'
 
 class GifBotTest < Minitest::Test
   include Rack::Test::Methods
   def app
-    #GifBotWeb
+    GifBotWeb
   end
 
   def setup
