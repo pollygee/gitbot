@@ -39,10 +39,4 @@ class GifBotTest < Minitest::Test
     assert_equal 400, last_response.status
     assert_equal 0, Gif.count
   end
-
-  def test_can_not_add_without_a_url
-    
-  end
-
-
 end
