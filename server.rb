@@ -5,9 +5,13 @@ class GifbotWeb < Sinatra::Base
   set :logging, true
 
   post "/add" do 
-    list = GifBot.new
-    gif = list.add_gif params[:url], params[:username]
-    gif.id.to_s
+  	if params[:url] && params[:username]
+      list = GifBot.new
+      gif = list.add_gif params[:url], params[:username]
+      gif.id.to_s
+    else
+      status 400
+    end
   end
 
 
