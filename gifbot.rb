@@ -31,19 +31,19 @@ end
 gifbot  = GifBot.new
 command = ARGV.shift
 
-if command == "add"
-  username = `whoami`.chomp
-  gifbot.add_gif ARGV.first, username
-elsif command == "serve"
-  link = gifbot.random_gif
-  system "open -a 'Google Chrome' '#{link}'"
-elsif command == "list"
-  gifbot.all_gifs.each do |g|
-    puts "#{g.id} #{g.creator.name}\t#{g.seen_count}\t#{g.url}\t#{g.all_tags}"
-  end
-elsif command == "tag"
-  id, tag_name = ARGV
-  gifbot.tag_gif id, tag_name
-else
-  puts "I don't know what '#{command}' means"
-end
+# if command == "add"
+#   username = `whoami`.chomp
+#   gifbot.add_gif ARGV.first, username
+# elsif command == "serve"
+#   link = gifbot.random_gif
+#   system "open -a 'Google Chrome' '#{link}'"
+# elsif command == "list"
+#   gifbot.all_gifs.each do |g|
+#     puts "#{g.id} #{g.creator.name}\t#{g.seen_count}\t#{g.url}\t#{g.all_tags}"
+#   end
+# elsif command == "tag"
+#   id, tag_name = ARGV
+#   gifbot.tag_gif id, tag_name
+# else
+#   puts "I don't know what '#{command}' means"
+# end
