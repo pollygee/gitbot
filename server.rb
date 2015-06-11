@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require './gifbot.rb'
+require 'pry'
 
 class GifbotWeb < Sinatra::Base
   set :logging, true
@@ -14,6 +15,15 @@ class GifbotWeb < Sinatra::Base
     end
   end
 
+  get "/show" do
+    gif_number = Gif.all.count
+    if gif_number > 0 
+      g = GifBot.new
+      g.random_gif
+    else
+      status 400
+    end
+  end
 
 end
 

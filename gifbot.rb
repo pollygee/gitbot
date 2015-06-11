@@ -12,7 +12,7 @@ class GifBot
 
   def random_gif
     g = Gif.all.sample
-    g.has_been_seen!
+    #g.has_been_seen!
     g.url
   end
 

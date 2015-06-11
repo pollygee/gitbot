@@ -39,4 +39,9 @@ class GifBotTest < Minitest::Test
     assert_equal 400, last_response.status
     assert_equal 0, Gif.count
   end
+
+  def test_get_a_gif
+
+  end
+
 end
