@@ -41,6 +41,9 @@ class GifBotTest < Minitest::Test
   end
 
   def test_get_a_gif
+    post "/get"
+    
+    assert gif
 
   end
 
