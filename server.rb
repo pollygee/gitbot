@@ -25,6 +25,10 @@ class GifbotWeb < Sinatra::Base
     end
   end
 
+  get "/all" do
+    Gif.all.to_json
+  end
+
 end
 
 if $0 == __FILE__
