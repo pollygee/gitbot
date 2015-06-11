@@ -58,10 +58,13 @@ class GifBotTest < Minitest::Test
       url: "sharkescape.com",
       username: "Jeff"
     get "/show"
-    urls = ["www.google.com", "www.nba.com", "chess.com", "rubyruby.com", "sharkescape.com"]
+    urls = ["www.google.com", "www.nba.com", "www.chess.com", "rubyruby.com", "sharkescape.com"]
     assert_equal 200, last_response.status
     assert_equal 5, Gif.count
     assert (urls.include? last_response.body)
   end
 
+  def test_get_all_gif_urls
+
+  end
 end
