@@ -40,11 +40,28 @@ class GifBotTest < Minitest::Test
     assert_equal 0, Gif.count
   end
 
-  def test_get_a_gif
-    post "/get"
-    
-    assert gif
 
+  def test_get_1_random_gif
+    post "/add",
+      url: "www.google.com",
+      username: "Mark"
+    post "/add",
+      url: "www.nba.com",
+      username: "Mark"
+    post "/add",
+      url: "www.chess.com",
+      username: "Mark"
+    post "/add",
+      url: "rubyruby.com",
+      username: "Polly"
+    post "/add",
+      url: "sharkescape.com",
+      username: "Jeff"
+    get "/show"
+    urls = ["www.google.com", "www.nba.com", "chess.com", "rubyruby.com", "sharkescape.com"]
+    assert_equal 200, last_response.status
+    assert_equal 5, Gif.count
+    assert (urls.include? last_response.body)
   end
 
 end
