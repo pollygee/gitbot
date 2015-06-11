@@ -19,7 +19,7 @@ class GifbotWeb < Sinatra::Base
     gif_number = Gif.all.count
     if gif_number > 0 
       g = GifBot.new
-      g.random_gif
+      g.random_gif.url
     else
       status 400
     end
