@@ -81,8 +81,9 @@ class GifBotTest < Minitest::Test
     post "/add",
       url: "sharkescape.com",
       username: "Jeff"
+    get "/all"
     urls = ["www.google.com", "www.nba.com", "www.chess.com", "rubyruby.com", "sharkescape.com"]
-    assert_equal urls,Gif.all.url.pluck(:url)
+    assert_equal 5, JSON.parse(r.body).length
   end
 end
 
