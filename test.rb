@@ -64,6 +64,29 @@ class GifBotTest < Minitest::Test
     assert (urls.include? last_response.body)
   end
 
+  def test_seen_count_works
+
+    assert_equal 0, Gif.where(seen_count:1).count
+    post "/add",
+      url: "www.google.com",
+      username: "Mark"
+    post "/add",
+      url: "www.nba.com",
+      username: "Mark"
+    post "/add",
+      url: "www.chess.com",
+      username: "Mark"
+    post "/add",
+      url: "rubyruby.com",
+      username: "Polly"
+    post "/add",
+      url: "sharkescape.com",
+      username: "Jeff"
+    get "/show"
+    assert_equal 1, Gif.where(seen_count:1).count
+  end
+
+
   def test_get_all_gif_urls
     post "/add",
       url: "www.google.com",
