@@ -58,6 +58,7 @@ class GifBotTest < Minitest::Test
       url: "sharkescape.com",
       username: "Jeff"
     get "/show"
+    binding.pry
     urls = ["www.google.com", "www.nba.com", "www.chess.com", "rubyruby.com", "sharkescape.com"]
     assert_equal 200, last_response.status
     assert_equal 5, Gif.count
@@ -65,6 +66,29 @@ class GifBotTest < Minitest::Test
   end
 
   def test_get_all_gif_urls
-
+    post "/add",
+      url: "www.google.com",
+      username: "Mark"
+    post "/add",
+      url: "www.nba.com",
+      username: "Mark"
+    post "/add",
+      url: "www.chess.com",
+      username: "Mark"
+    post "/add",
+      url: "rubyruby.com",
+      username: "Polly"
+    post "/add",
+      url: "sharkescape.com",
+      username: "Jeff"
+    urls = ["www.google.com", "www.nba.com", "www.chess.com", "rubyruby.com", "sharkescape.com"]
+    assert_equal urls,Gif.all.url.pluck(:url)
   end
 end
+
+
+
+
+
+
+
