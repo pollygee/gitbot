@@ -58,7 +58,6 @@ class GifBotTest < Minitest::Test
       url: "sharkescape.com",
       username: "Jeff"
     get "/show"
-    binding.pry
     urls = ["www.google.com", "www.nba.com", "www.chess.com", "rubyruby.com", "sharkescape.com"]
     assert_equal 200, last_response.status
     assert_equal 5, Gif.count
@@ -83,7 +82,7 @@ class GifBotTest < Minitest::Test
       username: "Jeff"
     get "/all"
     urls = ["www.google.com", "www.nba.com", "www.chess.com", "rubyruby.com", "sharkescape.com"]
-    assert_equal 5, JSON.parse(r.body).length
+    assert_equal 5, JSON.parse(last_response.body).length
   end
 end
 
