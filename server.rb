@@ -29,6 +29,15 @@ class GifbotWeb < Sinatra::Base
     Gif.all.to_json
   end
 
+  post "/tag" do
+    if params[:id] && params[:tagname]
+    t = GifBot.new
+    taggy = t.tag_gif params[:id], params[:tagname]
+    else
+      status 400
+    end
+  end
+
 
   ## Optional Test requires this:
 
