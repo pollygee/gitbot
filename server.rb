@@ -29,6 +29,12 @@ class GifbotWeb < Sinatra::Base
     Gif.all.to_json
   end
 
+
+  ## Optional Test requires this:
+
+  # get "/tag" do
+  # end
+
 end
 
 if $0 == __FILE__
