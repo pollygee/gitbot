@@ -20,6 +20,7 @@ class GifBotTest < Minitest::Test
     Gif.delete_all
     Tag.delete_all
     GifTag.delete_all
+    #Should we delete User class as well? 
   end
 
   def test_users_can_add_gifs
@@ -64,7 +65,33 @@ class GifBotTest < Minitest::Test
     assert (urls.include? last_response.body)
   end
 
+<<<<<<< HEAD
   def test_get_all_gifs
+=======
+  def test_seen_count_works
+    assert_equal 0, Gif.where(seen_count:1).count
+    post "/add",
+      url: "www.google.com",
+      username: "Mark"
+    post "/add",
+      url: "www.nba.com",
+      username: "Mark"
+    post "/add",
+      url: "www.chess.com",
+      username: "Mark"
+    post "/add",
+      url: "rubyruby.com",
+      username: "Polly"
+    post "/add",
+      url: "sharkescape.com",
+      username: "Jeff"
+    get "/show"
+    assert_equal 1, Gif.where(seen_count:1).count
+  end
+
+
+  def test_get_all_gif_urls
+>>>>>>> d626c17806b3e9f243e774f9a1155944724702c7
     post "/add",
       url: "www.google.com",
       username: "Mark"
@@ -90,6 +117,64 @@ class GifBotTest < Minitest::Test
     post "/gifs/2/tag",
       tag_name: "cat"
   end
+
+  def test_gifs_are_tagged
+    post "/add",
+      url: "www.google.com",
+      username: "Mark"
+    gif = Gif.find_by_url "www.google.com"
+    post "/tag",
+      id: gif.id,
+      tagname: "cookie"
+
+    giftag = GifTag.find_by gif_id: gif.id
+    assert giftag
+    assert_equal 200, last_response.status
+  end
+
+  def test_limit_lists
+    post "/add",
+      url: "www.google.com",
+      username: "Mark"
+    post "/add",
+      url: "www.bing.com",
+      username: "Bob"
+    post "/add",
+      url: "www.ask.com",
+      username: "Joe"
+    gif = Gif.find_by_url "www.google.com"
+    gif2 = Gif.find_by_url "www.bing.com"
+    gif3 = Gif.find_by_url "www.ask.com"
+    post "/tag",
+      id: gif.id,
+      tagname: "search"
+    post "/tag",
+      id: gif2.id,
+      tagname: "search"
+    post "/tag",
+      id: gif3.id,
+      tagname: "search"
+    h = Gif.all
+    ## *!*!*!*!*!*!*!*!*!*!*!
+  end
+
+
+  ## Optional Test that requires server side input
+
+  # def test_tag_pulls_gif
+  #   post "/add",
+  #     url: "www.google.com",
+  #     username: "Mark"
+  #   gif = Gif.find_by_url "www.google.com"
+  #   post "/tag",
+  #     id: gif.id,
+  #     tagname: "cookie"
+  #   get "/tag",
+  #     tagname: "cookie"
+  #   assert_equal tag.gif_id, gif.id
+  #   binding.pry
+  # end
+
 end
 
 

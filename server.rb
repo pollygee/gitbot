@@ -29,11 +29,29 @@ class GifbotWeb < Sinatra::Base
     Gif.all.to_json
   end
 
+<<<<<<< HEAD
   post "/gifs/gif_id/tag" do
     binding.pry
     params[:tag_name]
   end
 
+=======
+  post "/tag" do
+    if params[:id] && params[:tagname]
+    t = GifBot.new
+    taggy = t.tag_gif params[:id], params[:tagname]
+    else
+      status 400
+    end
+  end
+
+
+  ## Optional Test requires this:
+
+  # get "/tag" do
+  # end
+
+>>>>>>> d626c17806b3e9f243e774f9a1155944724702c7
 end
 
 if $0 == __FILE__
