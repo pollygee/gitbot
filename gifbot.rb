@@ -17,8 +17,8 @@ class GifBot
   end
 
   def random_gif_by_tag tag
-    g = Gif.joins(:tag).where(tags: {name:tag}).sample
-    g.has_been_seen
+    g = Gif.joins(:tag).where(tags: {name: tag}).sample
+    g.has_been_seen!
     g
   end
 
@@ -27,7 +27,7 @@ class GifBot
   end
 
   def list_by_tag tag
-    Gif.joins(:tag).where(tags: {name:tag})
+    g = Gif.joins(:tags).where(tags: {name: tag})
   end
 
   def tag_gif id, tag_name

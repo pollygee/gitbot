@@ -139,14 +139,51 @@ class GifBotTest < Minitest::Test
     gif3 = Gif.find_by_url "www.ask.com"
     post "/tag",
       id: gif.id,
-      tagname: "search"
+      tag_name: "search"
     post "/tag",
       id: gif2.id,
-      tagname: "search"
+      tag_name: "search"
     post "/tag",
       id: gif3.id,
-      tagname: "search"
-    h = Gif.all
+      tag_name: "not_search"
+    get "/all",
+      tag_name: "search"
+
+    assert_equal 200, last_response.status
+    response =JSON.parse(last_response.body)
+    assert_equal true, last_response.body.include?("www.google.com")
+    assert_equal true, last_response.body.include?("www.bing.com")
+  end
+
+  def get_single_random_gif_with_tag
+    post "/add",
+      url: "www.google.com",
+      username: "Mark"
+    post "/add",
+      url: "www.bing.com",
+      username: "Bob"
+    post "/add",
+      url: "www.ask.com",
+      username: "Joe"
+    gif = Gif.find_by_url "www.google.com"
+    gif2 = Gif.find_by_url "www.bing.com"
+    gif3 = Gif.find_by_url "www.ask.com"
+    post "/tag",
+      id: gif.id,
+      tag_name: "search"
+    post "/tag",
+      id: gif2.id,
+      tag_name: "search"
+    post "/tag",
+      id: gif3.id,
+      tag_name: "not_search"
+    get "/gif",
+      tag_name: "search"
+
+      assert_equal 200, last_response.status
+      response =JSON.parse(last_response.body)
+      #possible_answers = ["www.google.com", "www.bing.com"]
+      assert_equal true, response.include?("www.google.com")  || response.include?("www.bing.com")
   end
 
 end

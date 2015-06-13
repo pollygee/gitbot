@@ -28,12 +28,11 @@ class GifbotWeb < Sinatra::Base
   get "/all" do
     g = GifBot.new
     if params[:tag_name]
-      if params[:all]
-        g.list_by_tag params[:tag_name]
-      else
-
+      names = g.list_by_tag params[:tag_name]
+      names.to_json
     else
       g.all_gifs.to_json
+    end
   end
 
 
@@ -46,6 +45,14 @@ class GifbotWeb < Sinatra::Base
     end
   end
 
+  get "/gif" do
+    g = GifBot.new
+    if params[:tag_name]
+      g.random_by_tag params[:tag_name].to_json
+    else 
+      g.random_gif.to_json
+    end
+  end
 
 end
 
