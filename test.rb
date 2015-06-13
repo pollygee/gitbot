@@ -65,9 +65,7 @@ class GifBotTest < Minitest::Test
     assert (urls.include? last_response.body)
   end
 
-<<<<<<< HEAD
-  def test_get_all_gifs
-=======
+
   def test_seen_count_works
     assert_equal 0, Gif.where(seen_count:1).count
     post "/add",
@@ -91,7 +89,6 @@ class GifBotTest < Minitest::Test
 
 
   def test_get_all_gif_urls
->>>>>>> d626c17806b3e9f243e774f9a1155944724702c7
     post "/add",
       url: "www.google.com",
       username: "Mark"
@@ -113,11 +110,6 @@ class GifBotTest < Minitest::Test
     assert_equal 200, last_response.status
   end
 
-  def test_add_tag_to_a_gif
-    post "/gifs/2/tag",
-      tag_name: "cat"
-  end
-
   def test_gifs_are_tagged
     post "/add",
       url: "www.google.com",
@@ -125,7 +117,7 @@ class GifBotTest < Minitest::Test
     gif = Gif.find_by_url "www.google.com"
     post "/tag",
       id: gif.id,
-      tagname: "cookie"
+      tag_name: "cookie"
 
     giftag = GifTag.find_by gif_id: gif.id
     assert giftag
@@ -155,25 +147,7 @@ class GifBotTest < Minitest::Test
       id: gif3.id,
       tagname: "search"
     h = Gif.all
-    ## *!*!*!*!*!*!*!*!*!*!*!
   end
-
-
-  ## Optional Test that requires server side input
-
-  # def test_tag_pulls_gif
-  #   post "/add",
-  #     url: "www.google.com",
-  #     username: "Mark"
-  #   gif = Gif.find_by_url "www.google.com"
-  #   post "/tag",
-  #     id: gif.id,
-  #     tagname: "cookie"
-  #   get "/tag",
-  #     tagname: "cookie"
-  #   assert_equal tag.gif_id, gif.id
-  #   binding.pry
-  # end
 
 end
 

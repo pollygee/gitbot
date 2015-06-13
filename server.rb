@@ -26,57 +26,29 @@ class GifbotWeb < Sinatra::Base
   end
 
   get "/all" do
-    Gif.all.to_json
+    g = GifBot.new
+    if params[:tag_name]
+      if params[:all]
+        g.list_by_tag params[:tag_name]
+      else
+
+    else
+      g.all_gifs.to_json
   end
 
-<<<<<<< HEAD
-  post "/gifs/gif_id/tag" do
-    binding.pry
-    params[:tag_name]
-  end
 
-=======
   post "/tag" do
-    if params[:id] && params[:tagname]
+    if params[:id] && params[:tag_name]
     t = GifBot.new
-    taggy = t.tag_gif params[:id], params[:tagname]
+    taggy = t.tag_gif params[:id], params[:tag_name]
     else
       status 400
     end
   end
 
 
-  ## Optional Test requires this:
-
-  # get "/tag" do
-  # end
-
->>>>>>> d626c17806b3e9f243e774f9a1155944724702c7
 end
 
 if $0 == __FILE__
   GifbotWeb.start!
 end
-
-
-
-
-# class ToDoWeb < Sinatra::Base
-#   set :logging, true
-
-#   post "/add" do
-#     listicize = ToDoList.new
-#     item = listicize.create_entry params[:list], params[:description], params[:due_date]
-#     item.id.to_s
-#   end
-
-#   get "/list/:name" do
-#     list = List.find_by_list_name! params[:name]
-#     list.items.to_json
-#   end
-# end
-
-# # $0 is $PROGRAM_NAME
-# if $0 == __FILE__
-#   ToDoWeb.start!
-# end
