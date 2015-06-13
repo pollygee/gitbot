@@ -64,7 +64,7 @@ class GifBotTest < Minitest::Test
     assert (urls.include? last_response.body)
   end
 
-  def test_get_all_gif_urls
+  def test_get_all_gifs
     post "/add",
       url: "www.google.com",
       username: "Mark"
@@ -83,6 +83,12 @@ class GifBotTest < Minitest::Test
     get "/all"
     urls = ["www.google.com", "www.nba.com", "www.chess.com", "rubyruby.com", "sharkescape.com"]
     assert_equal 5, JSON.parse(last_response.body).length
+    assert_equal 200, last_response.status
+  end
+
+  def test_add_tag_to_a_gif
+    post "/gifs/2/tag",
+      tag_name: "cat"
   end
 end
 

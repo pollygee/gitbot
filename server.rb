@@ -29,6 +29,11 @@ class GifbotWeb < Sinatra::Base
     Gif.all.to_json
   end
 
+  post "/gifs/gif_id/tag" do
+    binding.pry
+    params[:tag_name]
+  end
+
 end
 
 if $0 == __FILE__
